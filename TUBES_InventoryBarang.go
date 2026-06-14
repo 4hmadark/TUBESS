@@ -108,7 +108,7 @@ func InputData() {
 		fmt.Scanln(&b.tanggal, &b.bulan, &b.tahun)
 		
 		for !checkdate(b.tanggal, b.bulan, b.tahun) {
-			fmt.Println("Format salah atau data kurang! Pastikan memasukkan dd mm yyyy.")
+			fmt.Println("Format salah atau data kurang!\nPastikan memasukkan dd mm yyyy.")
 			fmt.Print("Tanggal || dd mm yyyy: ")
 			b.tanggal, b.bulan, b.tahun = 0, 0, 0 
 			fmt.Scanln(&b.tanggal, &b.bulan, &b.tahun)
@@ -301,7 +301,7 @@ func updateDataByIndex() {
 				fmt.Scanln(&dataBarang[idxn-1].kategori)
 				fmt.Print("Keterangan (Masuk/Keluar): ")
 				fmt.Scanln(&dataBarang[idxn-1].keterangan)
-				fmt.Print("Tanggal (contoh 10 5 2023): ")
+				fmt.Print("Tanggal || dd mm yyyy: ")
 				fmt.Scan(&dataBarang[idxn-1].tanggal, &dataBarang[idxn-1].bulan, &dataBarang[idxn-1].tahun)
 				fmt.Print("Stok: ")
 				fmt.Scanln(&dataBarang[idxn-1].stok)
