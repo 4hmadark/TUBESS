@@ -13,7 +13,6 @@ type Barang struct {
 var dataBarang [NMAX]Barang
 var jumlahBarang int = 0
 
-// Spesifikasi Fungsi: Menampilkan menu utama program
 func menu(Menu *string) {
 	fmt.Println("-------------MENU-------------")
 	fmt.Println("1. Input Data Sembako")
@@ -34,7 +33,6 @@ func menu(Menu *string) {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Menampilkan sub-menu untuk melihat data
 func showData(show *string) {
 	fmt.Println("----------SHOW DATA SEMBAKO-----------")
 	fmt.Println("1. Show All Data by Urutan Input")
@@ -56,7 +54,6 @@ func showData(show *string) {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Menampilkan sub-menu untuk mengedit dan menghapus data
 func editData(edit *string) {
 	fmt.Println("----------EDIT DATA SEMBAKO-----------")
 	fmt.Println("1. Edit Data by Index")
@@ -76,7 +73,6 @@ func editData(edit *string) {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Memasukkan data transaksi sembako baru ke dalam array
 func InputData() {
 	var b Barang
 	var lanjut string = "1"
@@ -107,13 +103,13 @@ func InputData() {
 		}
 
 		fmt.Print("Tanggal || dd mm yyyy: ")
-		b.tanggal, b.bulan, b.tahun = 0, 0, 0 // Inisialisasi awal
+		b.tanggal, b.bulan, b.tahun = 0, 0, 0 
 		fmt.Scanln(&b.tanggal, &b.bulan, &b.tahun)
 
 		for !checkdate(b.tanggal, b.bulan, b.tahun) {
 			fmt.Println("Format salah atau data kurang!/nPastikan memasukkan || dd mm yyyy.")
 			fmt.Print("Tanggal || dd mm yyyy: ")
-			b.tanggal, b.bulan, b.tahun = 0, 0, 0 // Reset sebelum scan ulang
+			b.tanggal, b.bulan, b.tahun = 0, 0, 0 
 			fmt.Scanln(&b.tanggal, &b.bulan, &b.tahun)
 		}
 		fmt.Print("Stok: ")
@@ -138,7 +134,6 @@ func InputData() {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Menampilkan semua data berdasarkan urutan awal diinputkan
 func showAllData() {
 	if jumlahBarang == 0 {
 		fmt.Println("Data tidak ditemukan, silahkan isi data terlebih dahulu.")
@@ -159,7 +154,6 @@ func showAllData() {
 }
 
 func checkdate(tanggal, bulan, tahun int) bool {
-	// Tambahkan validasi tahun harus > 0
 	if tahun <= 0 || bulan < 1 || bulan > 12 || tanggal < 1 || tanggal > 31 {
 		return false
 	} else if bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11 {
@@ -286,7 +280,7 @@ func updateDataByIndex() {
 				fmt.Scanln(&dataBarang[idxn-1].kategori)
 				fmt.Print("Keterangan (Masuk/Keluar): ")
 				fmt.Scanln(&dataBarang[idxn-1].keterangan)
-				fmt.Print("Tanggal (contoh 10 5 2023): ")
+				fmt.Print("Tanggal || dd mm yyyy: ")
 				fmt.Scan(&dataBarang[idxn-1].tanggal, &dataBarang[idxn-1].bulan, &dataBarang[idxn-1].tahun)
 				fmt.Print("Stok: ")
 				fmt.Scanln(&dataBarang[idxn-1].stok)
@@ -392,14 +386,12 @@ func hapusData() {
 	}
 }
 
-// Spesifikasi Fungsi: Menyalin elemen dari array sumber ke array tujuan (digunakan untuk sorting)
 func copyData(src [NMAX]Barang, dest *[NMAX]Barang, jumlah int) {
 	for i := 0; i < jumlah; i++ {
 		(*dest)[i] = src[i]
 	}
 }
 
-// Spesifikasi Fungsi: Mengurutkan array berdasarkan jumlah stok (descending)
 func sortBesar(src [NMAX]Barang, jumlah int) [NMAX]Barang {
 	var dest [NMAX]Barang
 	var temp Barang
@@ -459,7 +451,6 @@ func showStok() {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Mengurutkan array berdasarkan tanggal (terlama ke terbaru / ascending)
 func sortTanggal(x [NMAX]Barang, jumlah int) [NMAX]Barang {
 	var dest [NMAX]Barang
 	var temp Barang
@@ -481,7 +472,6 @@ func sortTanggal(x [NMAX]Barang, jumlah int) [NMAX]Barang {
 	return dest
 }
 
-// Spesifikasi Fungsi: Menampilkan data yang diurutkan berdasarkan tanggal
 func showTanggal() {
 	if jumlahBarang == 0 {
 		fmt.Println("Data tidak ditemukan, silahkan isi data terlebih dahulu.")
@@ -618,7 +608,6 @@ func laporanMasukKeluarKategori() {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Menampilkan barang yang memiliki stok di bawah ambang batas yang ditentukan user
 func stokKritis() {
 	if jumlahBarang == 0 {
 		fmt.Println("Data tidak ditemukan, silahkan isi data terlebih dahulu.")
@@ -650,27 +639,24 @@ func stokKritis() {
 	fmt.Println()
 }
 
-// Spesifikasi Fungsi: Menghitung total stok riil setiap barang berdasarkan akumulasi status "Masuk" dan "Keluar"
 func updateData() ([NMAX]Barang, int) {
 	var stokBarang [NMAX]Barang
 	var jumlahStok int = 0
-	var i, j, k int // Menggunakan kembali variabel k sebagai penanda
+	var i, j, k int 
 
 	for i = 0; i < jumlahBarang; i++ {
-		k = 0 // k=0 berarti barang belum ditemukan
+		k = 0 
 		for j = 0; j < jumlahStok; j++ {
-			// Syarat diperketat: Nama DAN Kategori harus sama
 			if dataBarang[i].nama == stokBarang[j].nama && dataBarang[i].kategori == stokBarang[j].kategori {
 				if dataBarang[i].keterangan == "Masuk" {
 					stokBarang[j].stok += dataBarang[i].stok
 				} else {
 					stokBarang[j].stok -= dataBarang[i].stok
 				}
-				k = 1 // Tandai bahwa barang sudah ditemukan (tanpa perlu di-break)
+				k = 1 
 			}
 		}
 
-		// Jika setelah dicek semua (k == 0), tambahkan data baru ke akumulasi
 		if k == 0 {
 			stokBarang[jumlahStok].nama = dataBarang[i].nama
 			stokBarang[jumlahStok].kategori = dataBarang[i].kategori
@@ -686,7 +672,6 @@ func updateData() ([NMAX]Barang, int) {
 	return stokBarang, jumlahStok
 }
 
-// Spesifikasi Fungsi: Menampilkan laporan perhitungan akumulasi total stok riil
 func showAkumulasiStok() {
 	if jumlahBarang == 0 {
 		fmt.Println("Data kosong.")
